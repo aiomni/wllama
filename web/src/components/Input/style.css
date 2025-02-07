@@ -1,0 +1,20 @@
+.omni-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 0px #333333;
+
+  input {
+    height: 36px;
+    line-height: 36px;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+  }
+}

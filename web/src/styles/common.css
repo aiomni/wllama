@@ -1,0 +1,22 @@
+@import url(./reset.css);
+@import url(./variables.css);
+@import url(./polyfill.css);
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.full-center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
