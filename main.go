@@ -38,5 +38,11 @@ func main() {
 		},
 	}
 
-	s.Start()
+	go func() {
+		s.Start()
+	}()
+
+	fmt.Printf("Server started on  http://localhost:%d\n", s.Port)
+
+	select {}
 }

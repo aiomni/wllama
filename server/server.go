@@ -28,6 +28,11 @@ func (s *Server) Start() {
 			if path == "/" || path == "/index.html" {
 				return []byte("/web/index.html")
 			}
+
+			if strings.HasPrefix(path, "/web") && !strings.HasPrefix(path, "/web/static") {
+				return []byte("/web/index.html")
+			}
+
 			return []byte(path)
 		},
 		FS: s.WebFiles,
@@ -46,7 +51,7 @@ func (s *Server) Start() {
 		}
 
 		if pathname == "/" || pathname == "/index.html" {
-			staticHandler(ctx)
+			ctx.Redirect("/web", 301)
 			return
 
 		}
@@ -60,6 +65,7 @@ func (s *Server) Start() {
 	})
 
 	listener, err := reuseport.Listen("tcp4", fmt.Sprintf(":%d", s.Port))
+
 	if err != nil {
 		log.Fatalf("error in reuseport listener: %s", err)
 	}

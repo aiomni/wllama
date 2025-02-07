@@ -1,16 +1,12 @@
+import { OllamaProvider } from './context/Ollama';
+import { RouterApp } from './layout/RouterApp';
 
-import { OllamaProvider } from "./context/Ollama";
-import { Container } from "./layout/Container";
-import { RouterApp } from "./layout/RouterApp";
-
-import HomeRouter from './pages/home/router';
+import routes from './router';
 
 const App = () => {
 	return (
 		<OllamaProvider>
-			<Container>
-				<RouterApp routes={[HomeRouter]} />
-			</Container>
+			<RouterApp basename="/web" routes={routes} />
 		</OllamaProvider>
 	);
 };

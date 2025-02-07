@@ -1,7 +1,7 @@
 import type { RouteObject } from 'react-router';
 import Home from '.';
 
-export default {
+export const HomeRouter: RouteObject = {
 	path: '/',
 	element: <Home />
-} as RouteObject;
+};

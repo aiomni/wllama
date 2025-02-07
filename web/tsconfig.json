@@ -19,7 +19,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"paths": {
-			"@service/*": ["./src/service/*"],
+			"@/*": ["./src/*"],
 			"@hooks/*": ["./src/hooks/*"],
 			"@components/*": ["./src/components/*"],
 			"@typings/*": ["./src/typings/*"]

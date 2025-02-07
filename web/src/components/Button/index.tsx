@@ -15,7 +15,7 @@ interface ButtonProps {
 export default function Button({
 	children,
 	style,
-	className,
+	className = '',
 	onClick,
 }: PropsWithChildren<ButtonProps>) {
 	return (
