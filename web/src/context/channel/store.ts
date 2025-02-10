@@ -9,14 +9,12 @@ class ChannelStore {
 	#channel$Map = new Map<string, BehaviorSubject<ChannelState>>();
 	#snapshot = new ChannelSnapShot();
 
-	constructor() {
-		this.#snapshot.getChannels().then((snapshotChannels) => {
-			for (const channel of snapshotChannels) {
-				this.#channel$Map.set(channel.id, new BehaviorSubject(channel));
-			}
-			this.#channels$.next(snapshotChannels.map((c) => c.id));
-		});
-	}
+	initPromise = this.#snapshot.getChannels().then((snapshotChannels) => {
+		for (const channel of snapshotChannels) {
+			this.#channel$Map.set(channel.id, new BehaviorSubject(channel));
+		}
+		return this.#channels$.next(snapshotChannels.map((c) => c.id));
+	});
 
 	#addChannel = (id: string, channel: Omit<ChannelState, 'id'>) => {
 		const channel$ = new BehaviorSubject<ChannelState>({ id, ...channel });
@@ -86,6 +84,8 @@ class ChannelStore {
 
 		return () => sub$$.unsubscribe();
 	};
+
+	getChannel = (channelId: string) => this.#channel$Map.get(channelId) || null;
 }
 
 export const channelStore = new ChannelStore();

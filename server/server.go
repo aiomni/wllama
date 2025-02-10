@@ -1,6 +1,7 @@
 package server
 
 import (
+	"bytes"
 	"fmt"
 	"io/fs"
 	"log"
@@ -26,11 +27,15 @@ func (s *Server) Start() {
 		PathRewrite: func(ctx *fasthttp.RequestCtx) []byte {
 			path := string(ctx.Path())
 			if path == "/" || path == "/index.html" {
-				return []byte("/web/index.html")
+				return []byte("/web/dist/index.html")
 			}
 
-			if strings.HasPrefix(path, "/web") && !strings.HasPrefix(path, "/web/static") && !strings.HasPrefix(path, "/web/icons") {
-				return []byte("/web/index.html")
+			if strings.HasPrefix(path, "/web/static") || strings.HasPrefix(path, "/web/icons") {
+				return bytes.Replace([]byte(path), []byte("/web/"), []byte("/web/dist/"), 1)
+			}
+
+			if strings.HasPrefix(path, "/web") {
+				return []byte("/web/dist/index.html")
 			}
 
 			return []byte(path)

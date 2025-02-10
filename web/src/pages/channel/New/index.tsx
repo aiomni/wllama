@@ -6,9 +6,11 @@ import {
 	type PropsWithChildren,
 	useState,
 } from 'react';
+import { useNavigate } from 'react-router';
 
 export const NewChannel: FC<PropsWithChildren> = () => {
 	const [inputMessage, setInputMessage] = useState('');
+	const navigate = useNavigate();
 	const newChat = useNewChat();
 
 	const handleKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
@@ -24,7 +26,7 @@ export const NewChannel: FC<PropsWithChildren> = () => {
 					},
 				],
 			});
-			console.log(c.getValue().id);
+			navigate(`/channel/${c.getValue().id}`);
 		}
 	};
 

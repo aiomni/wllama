@@ -6,7 +6,7 @@ export default defineConfig({
   output: {
     assetPrefix: '/web',
     distPath: {
-      root: "./dist/web",
+      root: "./dist",
     }
   },
   tools: {

@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router';
 import Brand from '@/components/Brand';
 import Button from '@/components/Button';
 
-import { Channels } from './components/Channels';
-import { OllamaVersion } from './components/OllamaVersion';
+import { Channels } from './Channels';
+import { OllamaVersion } from './OllamaVersion';
 
 export const Sidebar: FC = () => {
 	const navigate = useNavigate();

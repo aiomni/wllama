@@ -106,9 +106,7 @@ export class ChannelSnapShot {
 			return acc;
 		}, {});
 
-		console.log(messageMap);
-
-		return channels.map((channel) => ({
+		return channels.reverse().map((channel) => ({
 			...channel,
 			messages: messageMap[channel.id],
 		}));

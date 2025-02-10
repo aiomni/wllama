@@ -90,7 +90,6 @@ video {
 
 * {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  user-select: none;
 }
 
 html {
@@ -136,7 +135,6 @@ blockquote:after,
 q:before,
 q:after {
   content: "";
-  content: none;
 }
 
 table {
@@ -169,7 +167,6 @@ img {
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -webkit-user-select: none;
   -o-user-select: none;
   user-select: none;
 }

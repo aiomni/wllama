@@ -4,6 +4,7 @@ import { type FC, useMemo } from 'react';
 import { Link, useLocation, useParams } from 'react-router';
 
 import './style.css';
+import type { OllamaMessage } from '@/typings';
 
 export const Channels: FC = () => {
 	const channels = useChannels();
@@ -16,7 +17,7 @@ export const Channels: FC = () => {
 	);
 
 	return (
-		<ul className="omni-channels w-full mt-8 ">
+		<ul className="omni-channels w-full mt-8 flex flex-col gap-4">
 			{channels.map((channel$) => {
 				const channel = channel$.getValue();
 
@@ -30,23 +31,24 @@ export const Channels: FC = () => {
 							},
 						)}
 					>
-						<div className="py-2 px-3 cursor-pointer flex">
-							<Link
-								className="flex-1 flex justify-between"
-								to={`/channel/${channel.id}`}
-							>
-								{channel.title || 'New Chat'}
-								{isChannelChatPage && channelId === channel.id && (
-									<span
-										className="block w-[20px] h-[20px]"
-										style={{
-											background:
-												'url("/web/icons/checked.svg") 0 0 / 100% 100%',
-										}}
-									/>
-								)}
-							</Link>
-						</div>
+						<Link
+							className="py-2 px-3 cursor-pointer flex flex-1 flex justify-between gap-2"
+							to={`/channel/${channel.id}`}
+						>
+							<span className="flex-1 overflow-hidden whitespace-nowrap">
+								{channel.title ||
+									(channel.messages[0] as OllamaMessage)?.content ||
+									'New Chat'}
+							</span>
+							{isChannelChatPage && channelId === channel.id && (
+								<span
+									className="block w-[20px] h-[20px]"
+									style={{
+										background: 'url("/web/icons/checked.svg") 0 0 / 100% 100%',
+									}}
+								/>
+							)}
+						</Link>
 					</li>
 				);
 			})}

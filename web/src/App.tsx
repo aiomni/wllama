@@ -1,4 +1,5 @@
 import { OllamaProvider } from './context/Ollama';
+import { ChannelSnapShotProvider } from './context/channel';
 import { RouterApp } from './layout/RouterApp';
 
 import routes from './router';
@@ -6,7 +7,9 @@ import routes from './router';
 const App = () => {
 	return (
 		<OllamaProvider>
-			<RouterApp basename="/web" routes={routes} />
+			<ChannelSnapShotProvider>
+				<RouterApp basename="/web" routes={routes} />
+			</ChannelSnapShotProvider>
 		</OllamaProvider>
 	);
 };

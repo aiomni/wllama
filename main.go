@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"embed"
 	"flag"
 	"fmt"
-	"os"
 
 	"github.com/aiomni/wllama/ollama"
 	"github.com/aiomni/wllama/routes"
@@ -13,6 +13,9 @@ import (
 )
 
 const ollama_default_addr = "http://localhost:11434"
+
+//go:embed web/dist/*
+var webFiles embed.FS
 
 func main() {
 	addrFlag := flag.String("addr", ollama_default_addr, "")
@@ -28,10 +31,10 @@ func main() {
 		return
 	}
 
-	webFS := os.DirFS("./web/dist")
 	s := server.Server{
-		Port:       5187,
-		WebFiles:   webFS,
+		Port:     5187,
+		WebFiles: &webFiles,
+		// WebFiles:   os.DirFS("./"),
 		Middleware: server.WrapOllamaMiddleware(client),
 		Routes: map[string]fasthttp.RequestHandler{
 			"/api/version": routes.Version,
