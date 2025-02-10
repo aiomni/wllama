@@ -7,8 +7,7 @@ export default function Home() {
 				<h1 className="flex flex-row items-center">
 					Welcome to
 					<span className="inline-block ml-2">
-						<span className="text-orange-600 font-bold">W</span>
-						<span className="text-xs font-light -ml-[3px]">ebO</span>
+						<span className="text-orange-600 font-bold">X</span>
 						<span className="text-rose-600 font-bold">llama</span>
 					</span>
 					.

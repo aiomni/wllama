@@ -5,8 +5,10 @@ import {
 	type FC,
 	type PropsWithChildren,
 	createContext,
-	useContext,
+	use,
 } from 'react';
+
+export * from './models';
 
 const OllamaContext = createContext({
 	version: '',
@@ -39,5 +41,5 @@ export const OllamaProvider: FC<PropsWithChildren> = ({ children }) => {
 };
 
 export const useOllamaVersion = () => {
-	return useContext(OllamaContext).version;
+	return use(OllamaContext).version;
 };

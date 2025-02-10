@@ -30,7 +30,7 @@ func (c *OllamaClient) CreateModel(ctx context.Context, req *CreateRequest, fn C
 	})
 }
 
-func (c *OllamaClient) ListLocalModels(ctx context.Context) (ListResponse, error) {
+func (c *OllamaClient) ListModels(ctx context.Context) (ListResponse, error) {
 	var lr ListResponse
 	err := c.fetch(ctx, http.MethodGet, "/api/tags", nil, &lr)
 

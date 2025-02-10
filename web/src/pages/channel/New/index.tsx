@@ -1,17 +1,27 @@
+import { Select } from '@/components/Select';
 import { Textarea } from '@/components/Textarea';
+import { useOllamaModels } from '@/context/Ollama';
 import { useNewChat } from '@/context/channel';
 import {
 	type FC,
 	type KeyboardEventHandler,
 	type PropsWithChildren,
+	useMemo,
 	useState,
 } from 'react';
 import { useNavigate } from 'react-router';
 
 export const NewChannel: FC<PropsWithChildren> = () => {
 	const [inputMessage, setInputMessage] = useState('');
+	const [model, setModel] = useState('deepseek-r1:32b');
 	const navigate = useNavigate();
 	const newChat = useNewChat();
+	const models = useOllamaModels();
+
+	const modelOptions = useMemo(
+		() => models.map((m) => ({ label: m.name, value: m.model })),
+		[models],
+	);
 
 	const handleKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
 		if (!e.nativeEvent.isComposing && !e.shiftKey && e.key === 'Enter') {
@@ -33,7 +43,15 @@ export const NewChannel: FC<PropsWithChildren> = () => {
 	return (
 		<div className="w-full h-screen p-[20px] flex flex-col gap-4">
 			<div className="w-full flex-1 bg-white bordered flex flex-col justify-center items-center text-[26px] font-bold">
-				New Chat
+				<div className="w-3xl flex flex-col justify-center items-center ">
+					<h3 className="text-5xl mb-10">New Chat</h3>
+					<Select
+						placeholder="Select Model to Chat"
+						options={modelOptions}
+						value={model}
+						onChange={setModel}
+					/>
+				</div>
 			</div>
 			<Textarea
 				className="w-full h-[200px] min-h-[200px]"

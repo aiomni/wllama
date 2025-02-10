@@ -3,7 +3,7 @@ import { Observable, switchMap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 
 export const streamChatService = (data: OllamaChatRequest) => {
-	return fromFetch('/api/chat', {
+	return fromFetch('/api/chat/completions', {
 		method: 'POST',
 		headers: { 'content-type': 'application/json' },
 		body: JSON.stringify({ ...data, stream: true }),
