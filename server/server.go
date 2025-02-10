@@ -2,23 +2,63 @@ package server
 
 import (
 	"bytes"
-	"fmt"
+	"errors"
 	"io/fs"
-	"log"
+	"net"
 	"strings"
 
 	"github.com/valyala/fasthttp"
-	"github.com/valyala/fasthttp/reuseport"
 )
 
 type Server struct {
-	Port       int
 	WebFiles   fs.FS
 	Middleware func(next fasthttp.RequestHandler) fasthttp.RequestHandler
 	Routes     map[string]fasthttp.RequestHandler
+
+	fh     *fasthttp.Server
+	isInit bool
 }
 
-func (s *Server) Start() {
+// InitServer 初始化一个 fasthttp.Server
+func (s *Server) InitServer() error {
+	if s.isInit {
+		return nil
+	}
+
+	s.fh = &fasthttp.Server{
+		Handler: s.Handler,
+	}
+
+	s.isInit = true
+
+	return nil
+}
+
+func (s *Server) Serve(ln net.Listener) error {
+	if err := s.InitServer(); err != nil {
+		return err
+	}
+
+	return s.fh.Serve(ln)
+}
+
+func (s *Server) ServeConn(c net.Conn) error {
+	if err := s.InitServer(); err != nil {
+		return err
+	}
+
+	return s.fh.ServeConn(c)
+}
+
+func (s *Server) Shutdown() error {
+	if s.fh == nil {
+		return errors.New("server is not running")
+	}
+
+	return s.fh.Shutdown()
+}
+
+func (s *Server) Handler(ctx *fasthttp.RequestCtx) {
 	fs := &fasthttp.FS{
 		Root:               "/",
 		IndexNames:         []string{"index.html"},
@@ -26,6 +66,7 @@ func (s *Server) Start() {
 		Compress:           true,
 		PathRewrite: func(ctx *fasthttp.RequestCtx) []byte {
 			path := string(ctx.Path())
+
 			if path == "/" || path == "/index.html" {
 				return []byte("/web/dist/index.html")
 			}
@@ -45,8 +86,8 @@ func (s *Server) Start() {
 
 	staticHandler := fs.NewRequestHandler()
 
-	// 创建请求路由器
-	router := s.Middleware(func(ctx *fasthttp.RequestCtx) {
+	// 创建请求处理函数
+	s.Middleware(func(ctx *fasthttp.RequestCtx) {
 		pathname := string(ctx.Path())
 		for route, handler := range s.Routes {
 			if pathname == route {
@@ -67,15 +108,5 @@ func (s *Server) Start() {
 		}
 
 		ctx.NotFound()
-	})
-
-	listener, err := reuseport.Listen("tcp4", fmt.Sprintf(":%d", s.Port))
-
-	if err != nil {
-		log.Fatalf("error in reuseport listener: %s", err)
-	}
-
-	if err := fasthttp.Serve(listener, router); err != nil {
-		log.Fatalf("error in fasthttp server: %s", err)
-	}
+	})(ctx)
 }

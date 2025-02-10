@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"io/fs"
+	"net"
 	"os"
 
 	"github.com/aiomni/xllama/ollama"
@@ -44,7 +45,6 @@ func main() {
 	}
 
 	s := server.Server{
-		Port:       5187,
 		WebFiles:   files,
 		Middleware: server.WrapOllamaMiddleware(client),
 		Routes: map[string]fasthttp.RequestHandler{
@@ -54,11 +54,16 @@ func main() {
 		},
 	}
 
+	ln, err := net.Listen("tcp", ":5187")
+	if err != nil {
+		panic(err)
+	}
+
 	go func() {
-		s.Start()
+		s.Serve(ln)
 	}()
 
-	fmt.Printf("Server started on  http://localhost:%d\n", s.Port)
+	fmt.Printf("Server started on %s\n", ln.Addr().String())
 
 	select {}
 }
