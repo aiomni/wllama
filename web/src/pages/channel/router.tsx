@@ -1,4 +1,5 @@
 import type { RouteObject } from 'react-router';
+import { ChannelChat } from './Chat';
 import { NewChannel } from './New';
 
 export const ChannelRouter: RouteObject = {
@@ -7,6 +8,10 @@ export const ChannelRouter: RouteObject = {
 		{
 			path: 'new',
 			Component: NewChannel,
+		},
+		{
+			path: ':channelId',
+			Component: ChannelChat,
 		},
 	],
 };

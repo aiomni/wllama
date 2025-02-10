@@ -1,8 +1,10 @@
 package utils
 
 import (
+	"bufio"
 	"encoding/json"
 	"errors"
+	"fmt"
 
 	"github.com/aiomni/wllama/ollama"
 	"github.com/valyala/fasthttp"
@@ -31,4 +33,16 @@ func WriteBody(ctx *fasthttp.RequestCtx, body any) {
 
 	ctx.Write(message)
 
+}
+
+func WriteBodyStream(w *bufio.Writer, data any) error {
+	message, _ := json.Marshal(data)
+
+	fmt.Fprintf(w, "%s\n", message)
+
+	if err := w.Flush(); err != nil {
+		return err
+	}
+
+	return nil
 }

@@ -35,6 +35,7 @@ func main() {
 		Middleware: server.WrapOllamaMiddleware(client),
 		Routes: map[string]fasthttp.RequestHandler{
 			"/api/version": routes.Version,
+			"/api/chat":    routes.Chat,
 		},
 	}
 

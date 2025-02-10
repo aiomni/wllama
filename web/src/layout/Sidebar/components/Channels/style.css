@@ -1,0 +1,12 @@
+.omni-channels_item {
+  border: 2px solid #333333;
+  box-shadow: 2px 2px 0px #333333;
+  
+  &:hover {
+    background: #fff;
+  }
+}
+
+.omni-channels_item.active {
+  background: var(--color-primary);
+}

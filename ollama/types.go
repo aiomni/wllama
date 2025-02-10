@@ -27,11 +27,6 @@ type CreateRequest struct {
 	System     string            `json:"system,omitempty"`
 	Parameters map[string]any    `json:"parameters,omitempty"`
 	Messages   []Message         `json:"messages,omitempty"`
-
-	// Deprecated: set the model name with Model instead
-	Name string `json:"name"`
-	// Deprecated: use Quantize instead
-	Quantization string `json:"quantization,omitempty"`
 }
 
 // ListResponse is the response from [Client.List].

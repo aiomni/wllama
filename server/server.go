@@ -29,7 +29,7 @@ func (s *Server) Start() {
 				return []byte("/web/index.html")
 			}
 
-			if strings.HasPrefix(path, "/web") && !strings.HasPrefix(path, "/web/static") {
+			if strings.HasPrefix(path, "/web") && !strings.HasPrefix(path, "/web/static") && !strings.HasPrefix(path, "/web/icons") {
 				return []byte("/web/index.html")
 			}
 

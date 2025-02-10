@@ -1,0 +1,26 @@
+.omni-textarea {
+  padding: 10px;
+  width: 100%;
+  color: #000;
+  height: auto;
+  min-height: 48px;
+  background-color: #fff;
+  border-radius: 10px;
+  resize: vertical;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 20px;
+  outline-width: 0;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 0px #333333;
+
+  &:focus {
+    border-color: #00b032;
+    box-shadow: 2px 2px 0px #00b032;
+  }
+
+  &[disabled] {
+    outline-color: gray;
+    cursor: not-allowed;
+  }
+}
