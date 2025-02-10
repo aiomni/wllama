@@ -1,4 +1,4 @@
-# Wllama
+# xllama
 
 Ollama Web UI
 
@@ -6,5 +6,5 @@ Ollama Web UI
 ## Build
 
 ```sh
-CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o wllama
+CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o xllama
 ```

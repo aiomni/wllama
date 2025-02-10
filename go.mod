@@ -1,4 +1,4 @@
-module github.com/aiomni/wllama
+module github.com/aiomni/xllama
 
 go 1.23.6
 

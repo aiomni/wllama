@@ -8,9 +8,9 @@ import (
 	"io/fs"
 	"os"
 
-	"github.com/aiomni/wllama/ollama"
-	"github.com/aiomni/wllama/routes"
-	"github.com/aiomni/wllama/server"
+	"github.com/aiomni/xllama/ollama"
+	"github.com/aiomni/xllama/routes"
+	"github.com/aiomni/xllama/server"
 	"github.com/valyala/fasthttp"
 )
 

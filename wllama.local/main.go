@@ -12,8 +12,8 @@ import (
 
 func main() {
 	// 定义服务参数：
-	// 实例名为 "wllama"，对应解析结果将呈现为 wllama._myservice._tcp.local.
-	instance := "wllama"
+	// 实例名为 "xllama"，对应解析结果将呈现为 xllama._myservice._tcp.local.
+	instance := "xllama"
 	// 自定义服务类型（注意必须以下划线开头），例如 "_myservice._tcp"
 	serviceType := "_http._tcp"
 	// mDNS 默认域名
@@ -21,7 +21,7 @@ func main() {
 	// 服务端口
 	port := 8158
 	// 自定义 TXT 记录，附带一些服务说明信息
-	txtRecords := []string{"version=1.0", "description=Wllama mDNS Service"}
+	txtRecords := []string{"version=1.0", "description=xllama mDNS Service"}
 
 	// 如果希望指定特定 IP（例如网卡 IP），可以构造 IP 数组，否则传 nil 则会自动获取本机 IP
 	// ips := []net.IP{net.ParseIP("192.168.1.100")}

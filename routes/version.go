@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/aiomni/wllama/utils"
+	"github.com/aiomni/xllama/utils"
 	"github.com/valyala/fasthttp"
 )
 

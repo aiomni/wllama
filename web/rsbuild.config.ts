@@ -4,7 +4,7 @@ import { UnoCSSRspackPlugin } from '@unocss/webpack/rspack';
 
 export default defineConfig({
 	html: {
-		title: 'Wllama',
+		title: 'xllama',
 		favicon: 'http://localhost:5187/web/icons/aiomni.svg',
 	},
 	output: {

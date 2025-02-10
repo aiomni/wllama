@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/aiomni/wllama/ollama"
+	"github.com/aiomni/xllama/ollama"
 	"github.com/valyala/fasthttp"
 )
 

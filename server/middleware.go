@@ -3,7 +3,7 @@ package server
 import (
 	"bytes"
 
-	"github.com/aiomni/wllama/ollama"
+	"github.com/aiomni/xllama/ollama"
 	"github.com/valyala/fasthttp"
 )
 

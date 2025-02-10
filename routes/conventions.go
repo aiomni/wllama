@@ -4,8 +4,8 @@ import (
 	"bufio"
 	"encoding/json"
 
-	"github.com/aiomni/wllama/ollama"
-	"github.com/aiomni/wllama/utils"
+	"github.com/aiomni/xllama/ollama"
+	"github.com/aiomni/xllama/utils"
 	"github.com/valyala/fasthttp"
 )
 
