@@ -13,6 +13,9 @@ export default defineConfig({
 			root: './dist',
 		},
 	},
+	server: {
+		base: '/web',
+	},
 	tools: {
 		rspack: {
 			plugins: [UnoCSSRspackPlugin()],

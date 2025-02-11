@@ -1,0 +1,24 @@
+.chat-bubble.sent {
+  flex-direction: row-reverse;
+
+  .chat-bubble__message {
+    box-shadow: -2px 2px 0px #333333;
+    background: #fffbeb;
+  }
+}
+
+.chat-bubble__message {
+  overflow: hidden;
+  margin: 0 10px;
+  box-shadow: 2px 2px 0px #333333;
+  padding: 20px;
+  line-height: 30px;
+  background-color: #eff6ff;
+  border: 2px solid #333333;
+  border-radius: 10px;
+  max-width: 80%;
+  word-break: break-word;
+  * {
+    user-select: text;
+  }
+}

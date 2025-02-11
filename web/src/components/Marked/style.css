@@ -1,0 +1,288 @@
+:root {
+  --omni-makred-bg-color: #ffffff;
+  --omni-makred-text-color: #333;
+  --omni-makred-heading-color: #222;
+  --omni-makred-code-bg: #f5f5f5;
+  --omni-makred-border-color: #ddd;
+  --omni-makred-link-color: #0077cc;
+  --omni-makred-link-hover: #005999;
+}
+
+.omni-makred {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: #37352F;
+  color: var(--omni-makred-text-color);
+
+  /* 标题样式 */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--omni-makred-heading-color);
+    margin-bottom: 10px;
+  }
+
+  h1 { font-size: 2em; margin-top: 1.5em; }
+  h2 { font-size: 1.75em; margin-top: 1.4em; }
+  h3 { font-size: 1.5em; margin-top: 1.3em; }
+  h4 { font-size: 1.25em; margin-top: 1.2em; }
+  h5 { font-size: 1.1em; margin-top: 1.1em; }
+  h6 { font-size: 1em; margin-top: 1em; color: #6B6B6B; }
+
+  p {
+    box-sizing: content-box;
+    margin-bottom: 16px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background: var(--omni-makred-code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  /* 引用块 */
+  blockquote {
+    border-left: 4px solid var(--omni-makred-border-color);
+    padding: 8px 16px;
+    margin: 16px 0;
+    color: var(--omni-makred-text-color);
+    font-style: italic;
+    background: var(--omni-makred-code-bg);
+  }
+
+  /* 列表 */
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+
+  ul li {
+    list-style-type: disc;
+  }
+
+  ol li {
+    list-style-type: decimal;
+  }
+
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+  }
+  
+  th, td {
+    border: 1px solid var(--omni-makred-border-color);
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background: var(--omni-makred-code-bg);
+    font-weight: bold;
+  }
+
+  /* 超链接 */
+  a {
+    color: var(--omni-makred-link-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+    color: var(--omni-makred-link-hover);
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background: var(--omni-makred-border-color);
+    margin: 2em 0;
+  }
+
+  
+  /* 任务列表 */
+  input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+  }
+
+  .think {
+    border-left: 4px solid var(--omni-makred-border-color);
+    padding: 8px 16px;
+    margin: 16px 0;
+    color: var(--omni-makred-text-color);
+    background: var(--omni-makred-code-bg);
+  }
+
+  /* Noctis – Highlight.js 主题 */
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    background-color: #052529; /* editor.background */
+    color: #b2cacd; /* editor.foreground */
+    padding: 1em;
+    font-family: Menlo, Monaco, 'Courier New', monospace, 'Fira Code', Consolas,
+      'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  /* 关键字 */
+  .hljs-keyword {
+    color: #df769b; /* KEYWORD */
+    font-style: italic; /* ITALIC */
+  }
+
+  /* 字符串 */
+  .hljs-string {
+    color: #49e9a6; /* STRING */
+  }
+
+  /* 注释 */
+  .hljs-comment {
+    color: #5b858b; /* COMMENT */
+    font-style: italic; /* ITALIC */
+  }
+
+  /* 数字 */
+  .hljs-number {
+    color: #7060eb; /* NUMBER */
+  }
+
+  /* 函数名 */
+  .hljs-function {
+    color: #16a3b6; /* FUNCTION */
+  }
+
+  /* 类名、函数名等 */
+  .hljs-title {
+    color: #16a3b6; /* FUNCTION */
+  }
+
+  /* 函数参数 */
+  .hljs-params {
+    color: #e4b781; /* VARIABLE */
+  }
+
+  /* 内置函数或类 */
+  .hljs-built_in {
+    color: #49d6e9; /* SUPPORT */
+  }
+
+  /* 字面量 */
+  .hljs-literal {
+    color: #d5971a; /* CONSTANT */
+  }
+
+  /* 属性名 */
+  .hljs-attr {
+    color: #d67e5c; /* ANNOTATION */
+  }
+
+  /* 替换文本 */
+  .hljs-subst {
+    color: #b2cacd; /* TEXT */
+  }
+
+  /* 类型名 */
+  .hljs-type {
+    color: #d67e5c; /* ANNOTATION */
+  }
+
+  /* 变量名 */
+  .hljs-variable {
+    color: #e4b781; /* VARIABLE */
+  }
+
+  /* 元数据 */
+  .hljs-meta {
+    color: #49ace9; /* MISC */
+  }
+
+  /* HTML 标签 */
+  .hljs-tag {
+    color: #e66533; /* TAG */
+  }
+
+  /* HTML 标签名 */
+  .hljs-name {
+    color: #e66533; /* TAG */
+  }
+
+  /* HTML 属性名 */
+  .hljs-attribute {
+    color: #d67e5c; /* ANNOTATION */
+  }
+
+  /* 符号 */
+  .hljs-symbol {
+    color: #d5971a; /* CONSTANT */
+  }
+
+  /* CSS 类选择器 */
+  .hljs-selector-class {
+    color: #49d6e9; /* SUPPORT */
+  }
+
+  /* CSS ID 选择器 */
+  .hljs-selector-id {
+    color: #49d6e9; /* SUPPORT */
+  }
+
+  /* CSS 标签选择器 */
+  .hljs-selector-tag {
+    color: #e66533; /* TAG */
+  }
+
+  /* CSS 属性选择器 */
+  .hljs-selector-attr {
+    color: #d67e5c; /* ANNOTATION */
+  }
+
+  /* CSS 伪类选择器 */
+  .hljs-selector-pseudo {
+    color: #49d6e9; /* SUPPORT */
+  }
+
+  /* 新增的代码 */
+  .hljs-addition {
+    color: #16b673; /* STRINGINTERPOLATED */
+  }
+
+  /* 删除的代码 */
+  .hljs-deletion {
+    color: #e34e1c; /* INVALID */
+  }
+
+  /* 链接 */
+  .hljs-link {
+    color: #40d4e7; /* textLink.foreground */
+    text-decoration: underline;
+  }
+
+  /* 加粗样式 */
+  .hljs-strong {
+    font-weight: bold; /* BOLD */
+  }
+
+  /* 斜体样式 */
+  .hljs-emphasis {
+    font-style: italic; /* ITALIC */
+  }
+
+  /* 加粗斜体样式 */
+  .hljs-strong.hljs-emphasis {
+    font-style: bold italic; /* BOLD-ITALIC */
+  }
+
+  /* 删除线样式 */
+  .hljs-strikethrough {
+    text-decoration: line-through; /* STRIKETHROUGH */
+  }
+
+
+}
