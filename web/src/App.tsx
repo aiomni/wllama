@@ -1,4 +1,4 @@
-import { OllamaModelsProvider, OllamaProvider } from './context/Ollama';
+import { OllamaModelsProvider, OllamaProvider } from './context/ollama';
 import { ChannelSnapShotProvider } from './context/channel';
 import { RouterApp } from './layout/RouterApp';
 

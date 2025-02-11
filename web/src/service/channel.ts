@@ -1,9 +1,10 @@
+import { XLLAMA_SERVER_HOST } from '@/constants/server';
 import type { OllamaChatRequest, OllamaChatResponse } from '@/typings';
 import { Observable, switchMap } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 
 export const streamChatService = (data: OllamaChatRequest) => {
-	return fromFetch('/api/chat/completions', {
+	return fromFetch(`${XLLAMA_SERVER_HOST}/api/chat/completions`, {
 		method: 'POST',
 		headers: { 'content-type': 'application/json' },
 		body: JSON.stringify({ ...data, stream: true }),

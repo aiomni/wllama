@@ -1,4 +1,4 @@
-import { useOllamaVersion } from '@/context/Ollama';
+import { useOllamaVersion } from '@/context/ollama';
 import type { FC } from 'react';
 
 export const OllamaVersion: FC = () => {

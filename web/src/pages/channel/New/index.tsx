@@ -1,6 +1,6 @@
 import { Select } from '@/components/Select';
 import { Textarea } from '@/components/Textarea';
-import { useOllamaModels } from '@/context/Ollama';
+import { useOllamaModels } from '@/context/ollama';
 import { useNewChat } from '@/context/channel';
 import {
 	type FC,
