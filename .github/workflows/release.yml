@@ -44,8 +44,8 @@ jobs:
 
       - name: Build
         run: |
-            GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o xllama-darwin-amd64 ./cmd/*.go |
-            GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o xllama-darwin-arm64 ./cmd/*.go
+            GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w -X 'main.Version=$XLLAMA_VERSION'" -trimpath -o xllama-darwin-amd64 ./cmd/*.go |
+            GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w -X 'main.Version=$XLLAMA_VERSION'" -trimpath -o xllama-darwin-arm64 ./cmd/*.go
 
       - name: Archive production artifacts (TAR)
         run: tar -cvzf ./xllama-darwin-amd64.tar.gz xllama-darwin-amd64 |

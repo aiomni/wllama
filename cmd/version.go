@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 )
 
-var version = os.Getenv("XLLAMA_VERSION")
+// Version Will be replace when build
+var Version = "v0.0.0"
 
 var versionCmd = &xllamaCommand{
 	Command: &cobra.Command{
@@ -21,10 +21,6 @@ var versionCmd = &xllamaCommand{
 }
 
 func cmdVersion(cmd *cobra.Command, args []string) (err error) {
-	if version == "" {
-		version = "v0.0.0"
-	}
-
-	fmt.Printf("xllama version: %s\n", version)
+	fmt.Printf("xllama version: %s\n", Version)
 	return nil
 }
