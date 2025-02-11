@@ -21,9 +21,20 @@ const thinkExtension: TokenizerAndRendererExtension = {
           text: match[1], // 标签内的内容
         };
       }
+
+      if (src.startsWith('<think>')) {
+        return {
+          type: 'think', // 自定义 token 类型
+          raw: src, // 完整匹配到的字符串
+          text: src.replace('<think>', ''), // 标签内的内容
+        };
+      }
     },
     renderer(token) {
-      const paragrams: string[] = token.text.trim().split('\n\n');
+      const paragrams: string[] = token.text.trim().split('\n\n').filter(Boolean);
+      if (!paragrams.length) {
+        return;
+      }
       // 将自定义 token 渲染成你希望的 HTML，比如加上一个特定的 CSS 类
       return `<div class="think">${paragrams
         .map((p) => `<p>${p}</p>`)
