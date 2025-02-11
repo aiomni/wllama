@@ -1,5 +1,5 @@
 export const WELCOME_TEXT = `
-xllama is a user-friendly interface for interacting with Ollama models directly from your web browser. 
+xllama is a user-friendly interface for interacting with Ollama models directly. 
 
 This platform allows you to easily load, manage, and utilize AI models without requiring complex setup or command-line operations.
 `;
