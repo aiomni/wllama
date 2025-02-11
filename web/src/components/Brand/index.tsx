@@ -15,7 +15,7 @@ const Brand: FC<BrandProps> = ({ className = '' }) => {
 			</div>
 			<p className="ml-[10px]">
 				<a href="/" className="text-slate-400">
-					<span className="text-3xl text-orange-600 font-bold">X</span>
+					<span className="text-3xl text-orange-600 font-bold">x</span>
 					<span className="text-3xl text-rose-600 font-bold">llama</span>
 				</a>
 			</p>

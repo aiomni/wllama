@@ -16,7 +16,7 @@ export const Sidebar: FC = () => {
 			<OllamaVersion />
 			<div className="w-full pl-[20px] my-4">
 				<Button className="w-full" onClick={() => navigate('/channel/new')}>
-					Add New Chat
+					New Chat
 				</Button>
 			</div>
 

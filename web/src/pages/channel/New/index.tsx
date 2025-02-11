@@ -1,7 +1,9 @@
+import { Marked } from '@/components/Marked';
 import { Select } from '@/components/Select';
 import { Textarea } from '@/components/Textarea';
-import { useOllamaModels } from '@/context/ollama';
+import { NO_MODEL_TEXT } from '@/constants/markdown';
 import { useNewChat } from '@/context/channel';
+import { useOllamaModels } from '@/context/ollama';
 import {
 	type FC,
 	type KeyboardEventHandler,
@@ -39,6 +41,18 @@ export const NewChannel: FC<PropsWithChildren> = () => {
 			navigate(`/channel/${c.getValue().id}`);
 		}
 	};
+
+	if (models.length < 1) {
+		return (
+			<div className="w-full h-screen p-[20px] flex flex-col gap-4">
+				<div className="w-full flex-1 bg-white bordered flex flex-col justify-center items-center p-10">
+					<div className="w-full max-w-[850px]">
+						<Marked content={NO_MODEL_TEXT} />
+					</div>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="w-full h-screen p-[20px] flex flex-col gap-4">

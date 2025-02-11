@@ -1,20 +1,18 @@
-import { useLayoutEffect, useRef, type FC } from 'react';
+import { type FC, useLayoutEffect, useRef } from 'react';
 import { marked } from './marked';
 import './style.css';
 
 interface MarkedProps {
-    content: string;
+	content: string;
 }
 
 export const Marked: FC<MarkedProps> = ({ content }) => {
-  const markedRef = useRef<HTMLDivElement>(null);
+	const markedRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    const result = marked.parse(content, { async: false });
-    markedRef.current!.innerHTML = result;
-  }, [content])
+	useLayoutEffect(() => {
+		const result = marked.parse(content, { async: false });
+		markedRef.current!.innerHTML = result;
+	}, [content]);
 
-  return (
-    <div className="omni-makred" ref={markedRef} />
-  );
-}
+	return <div className="omni-makred" ref={markedRef} />;
+};

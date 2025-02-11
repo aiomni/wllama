@@ -13,6 +13,7 @@
   line-height: 1.6;
   color: #37352F;
   color: var(--omni-makred-text-color);
+  word-break: auto-phrase;
 
   /* 标题样式 */
   h1, h2, h3, h4, h5, h6 {
@@ -30,6 +31,7 @@
 
   p {
     box-sizing: content-box;
+    margin-top: 16px;
     margin-bottom: 16px;
 
     &:last-child {
