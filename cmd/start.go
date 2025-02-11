@@ -18,7 +18,7 @@ var startCmd = &xllamaCommand{
 	Command: &cobra.Command{
 		Use:     "start",
 		GroupID: "process",
-		Long:    "xllama start [--config <path> [--watch]",
+		Long:    "xllama start [--addr <ollama addr>]",
 		Short:   "Starts the Xllama process in the background and then returns",
 		RunE:    cmdStart,
 	},

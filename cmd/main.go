@@ -51,6 +51,7 @@ var rootCmd = &xllamaCommand{
 		cmd.AddCommand(startCmd)
 		cmd.AddCommand(runCmd)
 		cmd.AddCommand(stopCmd)
+		cmd.AddCommand(versionCmd)
 	},
 }
 
