@@ -1,0 +1,96 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Release CMD
+
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+
+  build:
+    name: Build for Darwin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.23.6'
+          
+      - name: Install
+        run: go mod download
+        
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Build web
+        run: |
+          mkdir -p cmd/web
+          cd web
+          bun install
+          bun run build
+          cp -r ./dist ../cmd/web
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Build
+        run: |
+            GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o xllama-darwin-amd64 ./cmd/*.go |
+            GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o xllama-darwin-arm64 ./cmd/*.go
+
+      - name: Archive production artifacts (TAR)
+        run: tar -cvzf ./xllama-darwin-amd64.tar.gz xllama-darwin-amd64 |
+            tar -cvzf ./xllama-darwin-arm64.tar.gz xllama-darwin-arm64
+
+      - name: Upload arm64 artifact to workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: xllama-darwin-arm64
+          path: xllama-darwin-arm64.tar.gz
+        
+      - name: Upload amd64 artifact to workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: xllama-darwin-amd64
+          path: xllama-darwin-amd64.tar.gz
+
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download arm64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          pattern: xllama-darwin-arm64
+          path: .
+          merge-multiple: true
+
+      - name: Download amd64 artifact
+        uses: actions/download-artifact@v4
+        with:
+          pattern: xllama-darwin-amd64
+          path: .
+          merge-multiple: true
+
+      - name: List downloaded files
+        run: pwd && ls -lR
+        
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            xllama-darwin-arm64.tar.gz
+            xllama-darwin-amd64.tar.gz
+          repository: aiomni/xllama
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: true
+
