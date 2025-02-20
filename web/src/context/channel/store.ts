@@ -65,6 +65,51 @@ class ChannelStore {
 		return channel$;
 	};
 
+	newMessage = (channelId: string, message: Omit<OllamaMessage, 'role'>) => {
+		const channel$ = this.getChannel(channelId);
+		if (!channel$) {
+			return;
+		}
+
+		const message$ = new BehaviorSubject<OllamaMessage>({
+			role: 'assistant',
+			content: ''
+		});
+
+		channel$.next({
+			...channel$.value,
+			messages: [...channel$.getValue().messages, { ...message, role: 'user' }],
+		});
+
+		this.#snapshot.newStreamMessage(channelId, message$);
+
+		streamChatService({
+			...channel$.value,
+			stream: true,
+			messages: channel$.getValue().messages.filter(msg => !(msg instanceof BehaviorSubject)) as OllamaMessage[]
+		}).subscribe({
+			next: (resp) => {
+				message$.next({
+					...resp.message,
+					content: (message$.getValue()?.content ?? '') + resp.message.content,
+				});
+			},
+			complete: () => {
+				const messages = [...channel$.value.messages];
+				if (message$.value) {
+					messages[messages.length - 1] = message$.value;
+				}
+
+				channel$.next({
+					...channel$.value,
+					messages,
+				});
+			},
+		});
+
+		return channel$;
+	}
+
 	getChannels = () => {
 		return this.#channels$.getValue().map((id) => this.#channel$Map.get(id)!);
 	};

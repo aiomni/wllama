@@ -9,6 +9,7 @@ import {
 	useSyncExternalStore,
 } from 'react';
 import { channelStore } from './store';
+import { OllamaMessage } from '@/typings';
 
 export const ChannelSnapShotProvider: FC<PropsWithChildren> = ({
 	children,
@@ -39,6 +40,10 @@ export const useChannels = () => {
 
 export const useNewChat = () => {
 	return channelStore.newChat;
+};
+
+export const useNewMessage = (channelId: string) => {
+	return (message: Omit<OllamaMessage, "role">) => channelStore.newMessage(channelId, message);
 };
 
 export const useChannel = (channelId: string) => {

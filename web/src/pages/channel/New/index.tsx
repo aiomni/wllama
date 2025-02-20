@@ -28,7 +28,6 @@ export const NewChannel: FC<PropsWithChildren> = () => {
 	const handleKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
 		if (!e.nativeEvent.isComposing && !e.shiftKey && e.key === 'Enter') {
 			e.preventDefault();
-			setInputMessage('');
 			const c = newChat({
 				model: 'deepseek-r1:32b',
 				messages: [
@@ -38,6 +37,7 @@ export const NewChannel: FC<PropsWithChildren> = () => {
 					},
 				],
 			});
+			setInputMessage('');
 			navigate(`/channel/${c.getValue().id}`);
 		}
 	};

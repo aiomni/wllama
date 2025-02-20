@@ -1,14 +1,25 @@
 import { ChatList } from '@/components/ChatList';
 import { Textarea } from '@/components/Textarea';
-import { useChannel } from '@/context/channel';
-import { type FC, useState } from 'react';
+import { useChannel, useNewMessage } from '@/context/channel';
+import { type FC, type KeyboardEventHandler, useState } from 'react';
 import { useParams } from 'react-router';
 
 export const ChannelChat: FC = () => {
 	const { channelId } = useParams() as { channelId: string };
 	const channel = useChannel(channelId);
+	const newMessage = useNewMessage(channelId);
 
 	const [inputMessage, setInputMessage] = useState('');
+
+
+	const handleKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
+		if (!e.nativeEvent.isComposing && !e.shiftKey && e.key === 'Enter') {
+			e.preventDefault();
+
+			setInputMessage('');
+			newMessage({ content: inputMessage });
+		}
+	};
 
 	if (!channel) {
 		return (
@@ -29,7 +40,7 @@ export const ChannelChat: FC = () => {
 				className="w-full h-[200px] min-h-[200px]"
 				value={inputMessage}
 				onChange={setInputMessage}
-				// onKeyDown={handleKeyPress}
+				onKeyDown={handleKeyPress}
 			/>
 		</div>
 	);
