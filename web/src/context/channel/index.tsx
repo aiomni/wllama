@@ -1,4 +1,5 @@
 import { useRequest } from '@/hooks/useRequest';
+import type { OllamaMessage } from '@/typings';
 import {
 	type FC,
 	type PropsWithChildren,
@@ -9,7 +10,6 @@ import {
 	useSyncExternalStore,
 } from 'react';
 import { channelStore } from './store';
-import { OllamaMessage } from '@/typings';
 
 export const ChannelSnapShotProvider: FC<PropsWithChildren> = ({
 	children,
@@ -43,24 +43,43 @@ export const useNewChat = () => {
 };
 
 export const useNewMessage = (channelId: string) => {
-	return (message: Omit<OllamaMessage, "role">) => channelStore.newMessage(channelId, message);
+	return (message: Omit<OllamaMessage, 'role'>) =>
+		channelStore.newMessage(channelId, message);
 };
 
 export const useChannel = (channelId: string) => {
 	const [flag, setFlag] = useState(0);
+	const channel$ = useMemo(
+		() => channelStore.getChannel(channelId),
+		[channelId],
+	);
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	const channel = useMemo(
-		() => channelStore.getChannel(channelId)?.getValue() || null,
+		() => channel$?.getValue() || null,
 		[channelId, flag],
 	);
 
 	useEffect(() => {
-		return channelStore.channelsSubscribe((channels) => {
+		if (!channel$) {
+			return;
+		}
+		const sub$$ = channel$.subscribe(() => {
+			setFlag(Math.random());
+			console.log(111);
+		});
+
+		const sub2$$ = channelStore.channelsSubscribe((channels) => {
 			if (!channels.some((c) => c.getValue().id === channelId)) {
 				setFlag(Math.random());
 			}
 		});
-	}, [channelId]);
+
+		return () => {
+			sub$$.unsubscribe();
+			sub2$$();
+		};
+	}, [channelId, channel$]);
 
 	return channel;
 };

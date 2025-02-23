@@ -1,21 +1,21 @@
-import { Marked } from '@/components/Marked';
-import { Select } from '@/components/Select';
-import { Textarea } from '@/components/Textarea';
-import { NO_MODEL_TEXT } from '@/constants/markdown';
-import { useNewChat } from '@/context/channel';
-import { useOllamaModels } from '@/context/ollama';
+import { Marked } from "@/components/Marked";
+import { Select } from "@/components/Select";
+import { Textarea } from "@/components/Textarea";
+import { NO_MODEL_TEXT } from "@/constants/markdown";
+import { useNewChat } from "@/context/channel";
+import { useOllamaModels } from "@/context/ollama";
 import {
 	type FC,
 	type KeyboardEventHandler,
 	type PropsWithChildren,
 	useMemo,
 	useState,
-} from 'react';
-import { useNavigate } from 'react-router';
+} from "react";
+import { useNavigate } from "react-router";
 
 export const NewChannel: FC<PropsWithChildren> = () => {
-	const [inputMessage, setInputMessage] = useState('');
-	const [model, setModel] = useState('deepseek-r1:32b');
+	const [inputMessage, setInputMessage] = useState("");
+	const [model, setModel] = useState("deepseek-r1:32b");
 	const navigate = useNavigate();
 	const newChat = useNewChat();
 	const models = useOllamaModels();
@@ -26,18 +26,18 @@ export const NewChannel: FC<PropsWithChildren> = () => {
 	);
 
 	const handleKeyPress: KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
-		if (!e.nativeEvent.isComposing && !e.shiftKey && e.key === 'Enter') {
+		if (!e.nativeEvent.isComposing && !e.shiftKey && e.key === "Enter") {
 			e.preventDefault();
 			const c = newChat({
-				model: 'deepseek-r1:32b',
+				model,
 				messages: [
 					{
-						role: 'user',
+						role: "user",
 						content: inputMessage,
 					},
 				],
 			});
-			setInputMessage('');
+			setInputMessage("");
 			navigate(`/channel/${c.getValue().id}`);
 		}
 	};

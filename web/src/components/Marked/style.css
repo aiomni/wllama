@@ -34,6 +34,10 @@
     margin-top: 16px;
     margin-bottom: 16px;
 
+    &:first-child {
+      margin-top: 0;
+    }
+
     &:last-child {
       margin-bottom: 0;
     }

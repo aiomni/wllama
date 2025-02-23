@@ -71,22 +71,31 @@ class ChannelStore {
 			return;
 		}
 
+		const userMessage = {
+			role: 'user',
+			...message,
+		};
 		const message$ = new BehaviorSubject<OllamaMessage>({
 			role: 'assistant',
-			content: ''
+			content: '',
 		});
 
 		channel$.next({
 			...channel$.value,
-			messages: [...channel$.getValue().messages, { ...message, role: 'user' }],
+			messages: [...channel$.getValue().messages, userMessage, message$],
 		});
 
+		this.#snapshot.newMessage(channelId, userMessage);
 		this.#snapshot.newStreamMessage(channelId, message$);
 
 		streamChatService({
 			...channel$.value,
 			stream: true,
-			messages: channel$.getValue().messages.filter(msg => !(msg instanceof BehaviorSubject)) as OllamaMessage[]
+			messages: channel$
+				.getValue()
+				.messages.filter(
+					(msg) => !(msg instanceof BehaviorSubject),
+				) as OllamaMessage[],
 		}).subscribe({
 			next: (resp) => {
 				message$.next({
@@ -108,7 +117,7 @@ class ChannelStore {
 		});
 
 		return channel$;
-	}
+	};
 
 	getChannels = () => {
 		return this.#channels$.getValue().map((id) => this.#channel$Map.get(id)!);
